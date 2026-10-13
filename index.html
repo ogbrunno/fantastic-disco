@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Para você 💛</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sky:#0b1a4a; --ice:#cfe0ff; --gold:#f6c93a; --gold-soft:#ffe27a; --night:#050c24; --text:#f5f1de;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--sky:#0b1a4a;--ice:#cfe0ff;--gold:#f6c93a;--gold-soft:#ffe27a;--night:#050c24;--text:#f5f1de;}
+}
+:root[data-theme="dark"]{--sky:#0b1a4a;--ice:#cfe0ff;--gold:#f6c93a;--gold-soft:#ffe27a;--night:#050c24;--text:#f5f1de;}
+html{scroll-padding-top:env(safe-area-inset-top,0px);}
+body{margin:0;background:var(--sky);color:var(--text);font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;font-size:20px;line-height:1.55;}
+#sky{position:fixed;inset:0;width:100%;height:100%;z-index:0;}
+.glow{position:fixed;z-index:0;border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(255,238,160,.5),rgba(255,238,160,0) 70%);animation:tw 4s ease-in-out infinite;}
+@keyframes tw{0%,100%{opacity:.45;}50%{opacity:1;}}
+.shoot{position:fixed;top:9%;left:-10%;width:150px;height:2px;z-index:2;pointer-events:none;opacity:0;background:linear-gradient(90deg,transparent,#fff7c2);transform:rotate(25deg);animation:shoot 16s ease-in infinite 2s;}
+.shoot::after{content:"";position:absolute;right:0;top:-2px;width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 10px 3px rgba(255,226,122,.9);}
+@keyframes shoot{0%{opacity:0;transform:translate(0,0) rotate(25deg);}2%{opacity:1;}12%{opacity:0;transform:translate(110vw,52vw) rotate(25deg);}100%{opacity:0;transform:translate(110vw,52vw) rotate(25deg);}}
+main{position:relative;z-index:1;max-width:560px;margin:0 auto;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;padding:56px 18px 20px;min-height:calc(100vh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));min-height:calc(100svh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));}
+.card{position:relative;background:linear-gradient(180deg,rgba(10,24,78,.5),rgba(5,12,36,.62));-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);border:1px solid rgba(246,201,58,.4);border-radius:26px;padding:18px 18px 22px;text-align:center;box-shadow:0 14px 50px rgba(0,0,0,.45);text-shadow:0 1px 8px rgba(0,0,0,.65);animation:rise 1.4s ease-out both;}
+@keyframes rise{from{opacity:0;transform:translateY(16px);}}
+@keyframes sway{from{transform:rotate(-4deg);}to{transform:rotate(4deg);}}
+.flowers{display:flex;justify-content:center;align-items:center;gap:6px;margin:0 0 4px;}
+.flowers svg{display:block;overflow:visible;}
+h1{font-family:"Dancing Script","Brush Script MT",cursive;font-weight:600;font-size:clamp(38px,11vw,54px);line-height:1.1;margin:0 0 8px;color:var(--gold-soft);text-shadow:0 0 22px rgba(246,201,58,.35),0 2px 8px rgba(0,0,0,.6);}
+.msg{margin:0 auto 16px;max-width:30em;color:var(--ice);font-size:.95em;line-height:1.45;}
+.gilt{padding:7px;border-radius:12px;background:linear-gradient(135deg,#ffe27a,#b8861a 45%,#f6c93a 70%,#8a5f0e);box-shadow:0 0 34px rgba(246,201,58,.3),0 6px 18px rgba(0,0,0,.4);}
+.frame{position:relative;aspect-ratio:16/9;border-radius:6px;overflow:hidden;box-shadow:inset 0 0 0 2px rgba(5,12,36,.85);background:radial-gradient(circle at 70% 25%,#1d3d92,var(--night));}
+.frame iframe,.frame video{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000;}
+.play{position:absolute;inset:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:none;border:0;color:var(--text);font:inherit;cursor:pointer;}
+.play .btn{width:68px;height:68px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;box-shadow:0 0 28px rgba(246,201,58,.6);transition:transform .2s;}
+.play:hover .btn,.play:focus-visible .btn{transform:scale(1.08);}
+.play:focus-visible{outline:3px solid var(--ice);outline-offset:-6px;}
+.btn svg{margin-left:5px;}
+.hint{font-size:.95em;color:var(--ice);}
+.song{margin:14px 0 0;font-style:italic;font-weight:500;font-size:1.1em;}
+.song small{display:block;font-style:normal;color:var(--ice);opacity:.85;font-size:.85em;}
+.sign{margin:10px 0 0;font-family:"Dancing Script","Brush Script MT",cursive;font-size:1.45em;color:var(--gold-soft);}
+@media (prefers-reduced-motion: reduce){.card,.glow,.flowers svg{animation:none !important;}.shoot{display:none;}}
+</style>
+</head>
+<body>
+<canvas id="sky" aria-hidden="true"></canvas>
+<div class="shoot" aria-hidden="true"></div>
+<main>
+  <div class="card">
+    <div class="flowers" id="flowers" aria-hidden="true"></div>
+    <h1 id="name"></h1>
+    <p class="msg" id="message"></p>
+    <div class="gilt"><div class="frame" id="frame"></div></div>
+    <p class="song" id="song"></p>
+    <p class="sign" id="sign"></p>
+  </div>
+</main>
+
+<script>
+// ===== Edite aqui =====
+var CONFIG = {
+  name: "Maylanne",
+  message: "Criei essa página com bastante carinho pra você. Estou te dedicando essa música porque ela traduz a promessa mais sincera do meu coração, um sentimento real que sinto por você. Aperta o play e escuta.",
+  song: "I'll Be There",
+  artist: "The Jackson 5",
+  videoUrl: "musica.mp4",   // endereço do vídeo
+  
+  sign: "com carinho, Bruno"
+};
+// ======================
+
+document.getElementById("name").textContent = "Para " + CONFIG.name;
+document.getElementById("message").textContent = CONFIG.message;
+document.getElementById("sign").textContent = CONFIG.sign;
+var song = document.getElementById("song");
+song.textContent = CONFIG.song;
+var small = document.createElement("small");
+small.textContent = CONFIG.artist;
+song.appendChild(small);
+
+// Botão de play (o vídeo só carrega depois do toque, assim o som toca no celular)
+var frame = document.getElementById("frame");
+var btn = document.createElement("button");
+btn.className = "play";
+btn.type = "button";
+btn.setAttribute("aria-label", "Tocar a música");
+btn.innerHTML = '<span class="btn"><svg width="26" height="26" viewBox="0 0 24 24"><path d="M6 3.5v17l14-8.5z" fill="#0b1a4a"/></svg></span><span class="hint">aperta o play 💛</span>';
+frame.appendChild(btn);
+btn.addEventListener("click", function () {
+  if (!CONFIG.videoUrl) {
+    btn.querySelector(".hint").textContent = "o vídeo da música aparece aqui";
+    return;
+  }
+  var f = document.createElement("video");
+  f.src = CONFIG.videoUrl; f.controls = true; f.autoplay = true; f.preload = "auto"; f.setAttribute("playsinline", "");
+  
+  
+  f.title = "Música";
+  frame.innerHTML = "";
+  frame.appendChild(f);
+  var p = f.play(); if (p && p.catch) p.catch(function () {});
+});
+
+// ===== Céu pintado à mão, inspirado em A Noite Estrelada =====
+var cv = document.getElementById("sky"), vctx = cv.getContext("2d"), off = document.createElement("canvas"), ctx = off.getContext("2d");
+var W, H, S, DPR, seed, sw, glowEls = [], lastW = 0;
+var RAMP = ["#071647", "#0e2a76", "#173f9b", "#2559bd", "#3f7ad4", "#74a6e6", "#b4d0f0", "#e6e6bd"];
+var BAND = ["#f4e9a8", "#f4e9a8", "#e9e3b0", "#f2d95c", "#cfe0ee", "#9dc2ea", "#9dc2ea"];
+var DARK = ["#07110f", "#101b17", "#1b2a1e", "#2a2412", "#3a3418", "#18302a"];
+var HILL = ["#0a1a40", "#102a5c", "#16407a", "#1d4f7a", "#0f3a3a", "#183a50", "#2d6a7a"];
+
+function rnd() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+function pick(a) { return a[Math.floor(rnd() * a.length)]; }
+function brush(x, y, col, w, len, fn) {
+  ctx.beginPath(); ctx.moveTo(x, y);
+  for (var k = 0; k < 4; k++) { var a = fn(x, y); x += Math.cos(a) * len / 4; y += Math.sin(a) * len / 4; ctx.lineTo(x, y); }
+  ctx.strokeStyle = col; ctx.lineWidth = w; ctx.lineCap = "round"; ctx.stroke();
+}
+function ang(x, y) {
+  var b = 0.4 * Math.sin(x / (0.14 * S) + 1) + 0.3 * Math.sin(y / (0.1 * S));
+  var vx = 0.3 * Math.cos(b), vy = 0.3 * Math.sin(b);
+  sw.forEach(function (s) {
+    var dx = x - s.x, dy = y - s.y, r = Math.sqrt(dx * dx + dy * dy) + 0.001, w = Math.exp(-Math.pow(r / s.R, 2));
+    var t = Math.atan2(dy, dx) + s.d * Math.PI / 2 + 0.3;
+    vx += w * Math.cos(t); vy += w * Math.sin(t);
+  });
+  return Math.atan2(vy, vx);
+}
+function shade(x, y) {
+  var bw = 0, ph = 0;
+  sw.forEach(function (s) {
+    var dx = x - s.x, dy = y - s.y, r = Math.sqrt(dx * dx + dy * dy), w = Math.exp(-Math.pow(r / s.R, 2));
+    if (w > bw) { bw = w; ph = r / (0.085 * S) + s.d * Math.atan2(dy, dx) / Math.PI; }
+  });
+  var m = (1 - bw) * (0.18 + 0.22 * rnd()) + bw * (0.5 + 0.45 * Math.sin(ph * Math.PI)) + (rnd() - 0.5) * 0.18;
+  return RAMP[Math.max(0, Math.min(RAMP.length - 1, Math.round(m * (RAMP.length - 1))))];
+}
+function glow(cx, cy, r, al) {
+  var g = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+  g.addColorStop(0, "rgba(255,240,170," + al + ")"); g.addColorStop(1, "rgba(255,240,170,0)");
+  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, r, 0, 6.283); ctx.fill();
+}
+function ring(cx, cy, r, cols, wd) {
+  var n = Math.floor(2 * Math.PI * r / (wd * 1.5));
+  for (var j = 0; j < n; j++) {
+    var t = j / n * 2 * Math.PI + rnd() * 0.1, a = t + Math.PI / 2;
+    brush(cx + r * Math.cos(t), cy + r * Math.sin(t), pick(cols), wd, wd * 3.2, function () { return a; });
+  }
+}
+function setGlow(i, x, y, r) {
+  var e = glowEls[i];
+  if (!e) { e = document.createElement("div"); e.className = "glow"; e.style.animationDelay = (i * 0.6) + "s"; document.body.appendChild(e); glowEls[i] = e; }
+  e.style.left = x + "px"; e.style.top = y + "px"; e.style.width = e.style.height = (r * 2) + "px";
+}
+function ridge(x) { return H * (0.88 - 0.12 * Math.pow(Math.max(0, x / W - 0.5) * 2, 1.4)) + 0.012 * H * Math.sin(x / (0.07 * S)); }
+function yb(x) { return H * (0.62 - 0.16 * x / W) + 0.02 * H * Math.sin(x / (0.1 * S)); }
+function bang(x, y) { return Math.atan2(yb(x + 4) - yb(x), 4) + 0.25 * Math.sin(x / (0.05 * S) + y / (0.04 * S)); }
+
+function paint() {
+  W = innerWidth; H = innerHeight; S = Math.min(W, H * 0.62); lastW = W; seed = 11;
+  var dpr = Math.min(2, window.devicePixelRatio || 1);
+  cv.width = off.width = W * dpr; cv.height = off.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); DPR = dpr;
+  sw = [{ x: 0.52 * W, y: 0.12 * H, R: 0.42 * S, d: 1 }, { x: 0.86 * W, y: 0.36 * H, R: 0.22 * S, d: 1 }];
+  var g = ctx.createLinearGradient(0, 0, 0, H);
+  g.addColorStop(0, "#0a1c5a"); g.addColorStop(0.5, "#143a94"); g.addColorStop(1, "#0b1f5e");
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+
+  var i, x, y, N = Math.min(26000, Math.floor(W * H / 45));
+  for (i = 0; i < N; i++) { x = rnd() * W; y = rnd() * H * 0.9; brush(x, y, shade(x, y), S * (0.007 + 0.008 * rnd()), S * (0.035 + 0.04 * rnd()), ang); }
+  for (i = 0; i < W * H / 500; i++) { x = rnd() * W; y = yb(x) + (rnd() - 0.5) * H * 0.07 * (0.5 + x / W); brush(x, y, pick(BAND), S * (0.007 + 0.007 * rnd()), S * (0.04 + 0.04 * rnd()), bang); }
+
+  var wd = S * 0.0085, gi = 0;
+  [[0.30, 0.04, 0.8], [0.68, 0.25, 1.05], [0.95, 0.25, 0.9], [0.05, 0.46, 0.9], [0.94, 0.60, 1.1], [0.27, 0.64, 0.9], [0.78, 0.72, 1]].forEach(function (s) {
+    var cx = s[0] * W, cy = s[1] * H, r = 0.034 * S * s[2];
+    glow(cx, cy, r * 4, 0.45);
+    ring(cx, cy, r * 2.6, ["#6f9fe0", "#9cc3ee", "#cfe0f0"], wd);
+    ring(cx, cy, r * 2.0, ["#9cc3ee", "#e6e6bd", "#cfe0f0"], wd);
+    ring(cx, cy, r * 1.45, ["#f4e9a8", "#f2d95c", "#fff6c8"], wd);
+    ctx.beginPath(); ctx.arc(cx, cy, r * 0.95, 0, 6.283); ctx.fillStyle = "#fff1a8"; ctx.fill();
+    ring(cx, cy, r * 0.6, ["#f2c230", "#ffe27a"], wd * 0.9);
+    setGlow(gi++, cx, cy, r * 3.4);
+  });
+
+  // a lua (uma só)
+  var mx = 0.84 * W, my = 0.055 * H, mr = 0.072 * S;
+  glow(mx, my, mr * 3.2, 0.5);
+  ring(mx, my, mr * 3.0, ["#7fb0e6", "#cfe0f0"], wd);
+  ring(mx, my, mr * 2.4, ["#e6e6bd", "#cfe0f0"], wd);
+  ring(mx, my, mr * 1.9, ["#f4e9a8", "#f2d95c"], wd);
+  ring(mx, my, mr * 1.5, ["#f2c230", "#f4e9a8"], wd);
+  ctx.save();
+  ctx.beginPath(); ctx.arc(mx, my, mr, 0, 6.283); ctx.clip();
+  ctx.beginPath(); ctx.rect(0, 0, W, H); ctx.arc(mx + mr * 0.45, my - mr * 0.25, mr * 0.92, 0, 6.283); ctx.clip("evenodd");
+  ctx.fillStyle = "#e8902a"; ctx.fillRect(0, 0, W, H);
+  for (i = 0; i < 60; i++) brush(mx + (rnd() - 0.5) * 2 * mr, my + (rnd() - 0.5) * 2 * mr, pick(["#f2b13a", "#f6cd4a", "#e8802a"]), wd * 1.1, wd * 3, function () { return 2.2; });
+  ctx.restore();
+  setGlow(gi++, mx, my, mr * 3.4);
+
+  // colinas
+  for (i = 0; i < W * H / 160; i++) {
+    x = rnd() * W; var r0 = ridge(x); y = r0 + rnd() * (H - r0);
+    brush(x, y, pick(HILL), S * 0.009, S * 0.05, function (px) { return 0.2 * Math.sin(px / (0.06 * S)); });
+  }
+  // vilarejo e igreja
+  for (i = 0; i < 9; i++) {
+    var hx = (0.40 + i * 0.04) * W + rnd() * 0.01 * W, hy = ridge(hx) + S * 0.02, hw = S * (0.03 + 0.02 * rnd()), hh = S * (0.03 + 0.025 * rnd());
+    ctx.fillStyle = "#0b1b45"; ctx.fillRect(hx, hy - hh, hw, hh);
+    ctx.fillStyle = "#16295e"; ctx.beginPath(); ctx.moveTo(hx - 2, hy - hh); ctx.lineTo(hx + hw / 2, hy - hh - hw * 0.4); ctx.lineTo(hx + hw + 2, hy - hh); ctx.fill();
+    if (rnd() < 0.7) { ctx.fillStyle = "#f2d95c"; ctx.fillRect(hx + hw * 0.3, hy - hh * 0.6, S * 0.007, S * 0.01); }
+  }
+  var xs = 0.60 * W, ys = ridge(xs) - S * 0.01;
+  ctx.fillStyle = "#0b1b45"; ctx.beginPath(); ctx.moveTo(xs - S * 0.012, ys); ctx.lineTo(xs, ys - S * 0.14); ctx.lineTo(xs + S * 0.012, ys); ctx.fill();
+
+  // cipreste
+  var c0 = 0.13 * W, top = 0.1 * H;
+  for (i = 0; i < W * H / 260; i++) {
+    var t = rnd(), cy2 = H - t * (H - top), chw = 0.095 * S * Math.pow(1 - t, 0.7) + 0.01 * S;
+    x = c0 + 0.03 * S * Math.sin(t * 6) + (rnd() * 2 - 1) * chw;
+    brush(x, cy2, pick(DARK), S * (0.01 + 0.008 * rnd()), S * (0.06 + 0.05 * rnd()), function (px, py) { return -Math.PI / 2 + 0.6 * Math.sin(py / (0.06 * S) + t * 3) + (px - c0) / (S * 1.2); });
+  }
+}
+paint();
+window.addEventListener("resize", function () { if (Math.abs(innerWidth - lastW) > 30) { paint(); last = 0; } });
+
+// Ondulação do céu: a pintura fica pronta numa tela escondida e é copiada em faixas finas, deslocadas como uma onda
+var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches, last = 0;
+function wave(now) {
+  requestAnimationFrame(wave);
+  if (still ? last : now - last < 33) return;
+  last = now;
+  var t = now / 1000, st = Math.round(3 * DPR), pad = 0.02 * W * DPR, A = 0.011 * W * DPR;
+  for (var y = 0; y < off.height; y += st) {
+    var f = y / off.height, h = Math.min(st, off.height - y);
+    var dx = still ? 0 : A * (1.1 - 0.8 * f) * (Math.sin(f * 14 + t * 0.4) + 0.5 * Math.sin(f * 33 - t * 0.25));
+    vctx.drawImage(off, pad + dx, y, off.width - 2 * pad, h, 0, y, off.width, h);
+  }
+}
+requestAnimationFrame(wave);
+
+// ===== Buquê =====
+var NS = "http://www.w3.org/2000/svg";
+function el(tag, attrs, parent) {
+  var e = document.createElementNS(NS, tag);
+  for (var k in attrs) e.setAttribute(k, attrs[k]);
+  parent.appendChild(e);
+  return e;
+}
+function petals(g, colors, center) {
+  [[26, 44, 3.8, 0], [20, 35, 4.2, 7], [14, 25, 4.2, 4], [9, 15, 3.8, 0]].forEach(function (r, ri) {
+    for (var i = 0; i < r[0]; i++) {
+      el("ellipse", { cx: 0, cy: -r[1] / 2, rx: r[2], ry: r[1] / 2, fill: colors[ri % 3], stroke: "rgba(5,12,36,.3)", "stroke-width": 0.6, transform: "rotate(" + (i * 360 / r[0] + r[3]) + ")" }, g);
+    }
+  });
+  el("circle", { r: 8, fill: center }, g);
+  el("circle", { r: 3.5, fill: "rgba(255,255,255,.4)" }, g);
+}
+function flower(size, colors, center, dur) {
+  var svg = document.createElementNS(NS, "svg");
+  svg.setAttribute("viewBox", "-50 -50 100 100");
+  svg.setAttribute("width", size);
+  svg.setAttribute("height", size);
+  petals(svg, colors, center);
+  svg.style.animation = "sway " + dur + "s ease-in-out infinite alternate";
+  return svg;
+}
+var blue = ["#3d6fe0", "#2a52b8", "#7fa6f2"], Y = ["#ffd23f", "#f2b705", "#ffe680"];
+var fl = document.getElementById("flowers");
+fl.appendChild(flower(54, blue, "#f6c93a", 5));
+fl.appendChild(flower(68, Y, "#c98a00", 6));
+fl.appendChild(flower(54, blue, "#f6c93a", 7));
+</script>
+</body>
+</html>
